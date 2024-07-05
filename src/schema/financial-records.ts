@@ -1,17 +1,17 @@
+
 import mongoose from "mongoose";
 
 interface FinancialRecord {
-  userID: string;
+  userId: string;
   date: Date;
   description: string;
   amount: number;
   category: string;
   paymentMethod: string;
-
 }
 
 const financialRecordsSchema = new mongoose.Schema<FinancialRecord>({
-  userID: {
+  userId: {
     type: String,
     required: true,
   },
@@ -21,7 +21,7 @@ const financialRecordsSchema = new mongoose.Schema<FinancialRecord>({
   },
   date: {
     type: Date,
-    required: true,
+    default: Date.now, // Default value to current date if not provided
   },
   description: {
     type: String,
@@ -37,11 +37,6 @@ const financialRecordsSchema = new mongoose.Schema<FinancialRecord>({
   },
 });
 
-
-const FinancialRecordsModel=mongoose.model<FinancialRecord>(
-    "FinancialRecord",
-    financialRecordsSchema
-);
-
+const FinancialRecordsModel = mongoose.model<FinancialRecord>("FinancialRecord", financialRecordsSchema);
 
 export default FinancialRecordsModel;

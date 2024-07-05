@@ -1,20 +1,18 @@
+import express, { Express } from "express";
+import cors from "cors";
 
-import express, { Express } from 'express';
-
-import connectToMongo from './db';
-import financialRecordRouter from "./routes/financial-record";
+import connectToMongo from "./db";
+import financialRecordRouter from "./routes/financial-records";
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
-
+app.use(cors());
 connectToMongo();
 
-
-app.use("/financial-records", financialRecordRouter)
-
+app.use("/financial-records", financialRecordRouter);
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server is running on port http://localhost:${port}`);
 });
